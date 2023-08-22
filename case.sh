@@ -1,5 +1,6 @@
 echo "Enter 1 2 3: "
 read num1
+echo "Number received:"
 case "$num1" in
 	"1") echo "The number is 1"
 		;;
