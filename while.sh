@@ -1,4 +1,4 @@
-echo "Enter a number: "
+echo "Enter a number :0 : "
 read num1
 num=1
 while [ $num -lt 11 ]
