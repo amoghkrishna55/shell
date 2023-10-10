@@ -6,6 +6,7 @@ char ans[100] = "";
 void* conc(void* arg) {
     char* myarg = (char*)arg;
     strcat(ans, myarg);
+    strcat(ans," ");
     pthread_exit(NULL);
 }
 
