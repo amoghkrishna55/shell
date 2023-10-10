@@ -1,25 +1,24 @@
 #include <stdio.h>
 #include <pthread.h>
-#include <string.h> 
+#include <string.h>
 
-void* conc(void* arr, void* ans) {
-    char* myarr = (char*)arr;
-    char* myans = (char*)ans; 
-    strcpy(myans, myarr);
-    return NULL;
+char ans[100] = "";
+void* conc(void* arg) {
+    char* myarg = (char*)arg;
+    strcat(ans, myarg);
+    pthread_exit(NULL);
 }
 
 int main() {
-    char line[100];
-    char ans[100] = "";
     int a;
     pthread_t thread1;
     scanf("%d", &a);
-    while (a--) {
-        scanf("%s", line);
+    for (int i = 0; i < a; i++) {
+        char line[100];
+        scanf(" %s", line);
         pthread_create(&thread1, NULL, conc, (void*)line);
         pthread_join(thread1, NULL);
     }
-    printf("%s\n", ans);
+    printf("Concatenated string: %s\n", ans);
     return 0;
 }
