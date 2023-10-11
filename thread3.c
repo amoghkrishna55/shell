@@ -5,9 +5,9 @@
 struct ThreadArgs {
     int* arr;
     int size;
-    int* maxResult;
-    int* minResult;
-    float* avgResult;
+    int maxResult;
+    int minResult;
+    float avgResult;
 };
 
 void* avg(void* arg) {
@@ -19,7 +19,7 @@ void* avg(void* arg) {
         sum += arr[i];
     }
     float avg = (float)sum / size;
-    *(args->avgResult) = avg;
+    (args->avgResult) = avg;
     pthread_exit(NULL);
 }
 
@@ -35,7 +35,7 @@ void* max(void* arg) {
         }
     }
 
-    *(args->maxResult) = max_value;
+    (args->maxResult) = max_value;
     pthread_exit(NULL);
 }
 
@@ -51,7 +51,7 @@ void* min(void* arg) {
         }
     }
 
-    *(args->minResult) = min_value;
+    (args->minResult) = min_value;
     pthread_exit(NULL);
 }
 
@@ -69,9 +69,6 @@ int main() {
     struct ThreadArgs args;
     args.arr = array;
     args.size = arraySize;
-    args.maxResult = &maxResult;
-    args.minResult = &minResult;
-    args.avgResult = &avgResult;
 
     pthread_create(&max_tid, NULL, max, &args);
     pthread_create(&min_tid, NULL, min, &args);
@@ -80,6 +77,10 @@ int main() {
     pthread_join(max_tid, NULL);
     pthread_join(min_tid, NULL);
     pthread_join(avg_tid, NULL);
+
+    minResult = args.minResult;
+    avgResult = args.avgResult;
+    maxResult = args.maxResult;
 
     printf("Maximum: %d\n", maxResult);
     printf("Minimum: %d\n", minResult);
