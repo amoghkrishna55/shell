@@ -85,5 +85,5 @@ int main() {
     printf("Maximum: %d\n", maxResult);
     printf("Minimum: %d\n", minResult);
     printf("Average: %.2f\n", avgResult);
-
+    return 0;
 }
