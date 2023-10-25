@@ -3,15 +3,13 @@
 #include<sys/types.h>
 #include<string.h>
 #include<stdlib.h>
-#include<time.h>
 
 int main(){
     int fd[2], nb;
     pid_t pid;
     int n;
     pipe(fd);
-    srand(time(NULL));
-    int a = rand()%100;
+    int a = rand();
     pid = fork();
     if(pid==0){
         close(fd[0]);
